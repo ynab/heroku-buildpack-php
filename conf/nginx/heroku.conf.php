@@ -26,6 +26,11 @@ http {
         server unix:/tmp/heroku.fcgi.<?=getenv('PORT')?:'8080'?>.sock max_fails=3 fail_timeout=3s;
         keepalive 16;
     }
+
+   server {
+     server_name app.ynab.com;
+     return 301 https://app.youneedabudget.com;
+   }
     
     server {
         # define an easy to reference name that can be used in try_files
