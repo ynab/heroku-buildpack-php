@@ -57,6 +57,11 @@ http {
         error_log stderr;
         access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
         
+        # Force TLS
+        if ($http_x_forwarded_proto != "https") {
+            return 301 https://www.youneedabudget.com$request_uri;
+        }
+
         include "<?=getenv('HEROKU_PHP_NGINX_CONFIG_INCLUDE')?>";
         
         # restrict access to hidden files, just in case
