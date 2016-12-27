@@ -27,11 +27,6 @@ http {
         keepalive 16;
     }
 
-   server {
-     server_name app.ynab.com;
-     return 301 https://app.youneedabudget.com;
-   }
-    
     server {
         # define an easy to reference name that can be used in try_files
         location @heroku-fcgi {
