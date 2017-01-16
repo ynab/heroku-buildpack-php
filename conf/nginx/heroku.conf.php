@@ -64,13 +64,13 @@ http {
 
         location = /wp-login.php {
             auth_basic "Login";
-            auth_basic_user_file .htpasswd;
+            auth_basic_user_file <?=getenv('HEROKU_APP_DIR')?:getcwd()?>/.htpasswd;
             try_files @heroku-fcgi @heroku-fcgi;
         }
 
         location ~* /wp-admin/(.+)$ {
            auth_basic "Login";
-           auth_basic_user_file .htpasswd;
+           auth_basic_user_file <?=getenv('HEROKU_APP_DIR')?:getcwd()?>/.htpasswd;
            try_files @heroku-fcgi @heroku-fcgi;
         }
 
