@@ -58,9 +58,9 @@ http {
         access_log /tmp/heroku.nginx_access.<?=getenv('PORT')?:'8080'?>.log;
         
         # Force TLS
-        #if ($http_x_forwarded_proto != "https") {
-        #    return 301 https://www.youneedabudget.com$request_uri;
-        #}
+        if ($http_x_forwarded_proto != "https") {
+            return 301 https://$host$request_uri;
+        }
 
         location = /wp-login.php {
             auth_basic "Login";
