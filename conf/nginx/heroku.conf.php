@@ -62,6 +62,18 @@ http {
         #    return 301 https://www.youneedabudget.com$request_uri;
         #}
 
+        location = /wp-login.php {
+            auth_basic "Login";
+            auth_basic_user_file getenv('HEROKU_APP_DIR')/.htpasswd;
+            try_files @heroku-fcgi @heroku-fcgi;
+        }
+
+        location ~* /wp-admin/(.+)$ {
+           auth_basic "Login";
+           auth_basic_user_file getenv('HEROKU_APP_DIR')/.htpasswd;
+           try_files @heroku-fcgi @heroku-fcgi;
+        }
+
         include "<?=getenv('HEROKU_PHP_NGINX_CONFIG_INCLUDE')?>";
         
         # restrict access to hidden files, just in case
