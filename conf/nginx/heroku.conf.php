@@ -71,7 +71,6 @@ http {
         location ~* /wp-admin/(.+)$ {
             auth_basic "Login";
             auth_basic_user_file <?=getenv('HEROKU_APP_DIR')?:getcwd()?>/.htpasswd;
-            add_header Content-Security-Policy "default-src * 'unsafe-inline' 'unsafe-eval'; report-uri https://9df0034f5bff80b0d11cf67292bdca98.report-uri.io/r/default/csp/enforce";
             try_files @heroku-fcgi @heroku-fcgi;
         }
 
