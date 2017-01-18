@@ -71,15 +71,7 @@ http {
         location ~* /wp-admin/(.+)$ {
             auth_basic "Login";
             auth_basic_user_file <?=getenv('HEROKU_APP_DIR')?:getcwd()?>/.htpasswd;
-            
-            add_header Content-Security-Policy "default-src 'self' * 'unsafe-inline' 'unsafe-eval' data:";
-			   
-            # Pass to fastcgi upstream directly to preserve add_header
-	    include fastcgi_params;
-            fastcgi_split_path_info ^(.+\.php)(/.*)$;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            fastcgi_param PATH_INFO $fastcgi_path_info if_not_empty;
-            fastcgi_pass heroku-fcgi;
+            try_files @heroku-fcgi @heroku-fcgi;
         }
 
         location = /wp-admin/admin-ajax.php {
