@@ -79,8 +79,7 @@ http {
             fastcgi_split_path_info ^(.+\.php)(/.*)$;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             fastcgi_param PATH_INFO $fastcgi_path_info if_not_empty;
-            fastcgi_pass heroku-fcgi;
-            try_files @heroku-fcgi @heroku-fcgi;
+            fastcgi_pass heroku-fcgi;         
         }
 
         location = /wp-admin/admin-ajax.php {
