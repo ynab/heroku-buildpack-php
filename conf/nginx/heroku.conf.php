@@ -87,6 +87,11 @@ http {
             try_files @heroku-fcgi @heroku-fcgi;
         }
 
+        location = /wp-admin/admin-post.php {
+            # Auth exception
+            try_files @heroku-fcgi @heroku-fcgi;
+        }
+
         include "<?=getenv('HEROKU_PHP_NGINX_CONFIG_INCLUDE')?>";
 
         # restrict access to hidden files, just in case
